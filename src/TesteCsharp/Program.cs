@@ -11,11 +11,11 @@ namespace TesteCsharp
 
             Person investor1 = new Person("Marco Damaceno");
             Transaction transaction1 = new Transaction(investor1, stock1, 3, "compra");
-            transaction1 = Transaction.transact(transaction1);
+            transaction1 = investor1.Transact(transaction1);
 
             Company investor2 = new Company("BlackRock");
             Transaction transaction2 = new Transaction(investor2, stock2, 9, "venda");
-            transaction2 = Transaction.transact(transaction2);
+            transaction2 = investor2.Transact(transaction2);
 
             Console.WriteLine("========== Relatório de transação nº 1 ==========");
             Console.WriteLine("Nome: " + transaction1.investor.name);
