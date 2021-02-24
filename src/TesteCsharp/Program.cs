@@ -15,7 +15,7 @@ namespace TesteCsharp
                 Name = "CASH3"
             };
 
-            CreateStockOutput stock = CreateStock.handle(payload);
+            Stock stock = CreateStock.handle(payload);
 
             Console.WriteLine(JsonSerializer.Serialize(stock));
             // Stock stock1 = new Stock("VALE3", 30.50, "Brazil");

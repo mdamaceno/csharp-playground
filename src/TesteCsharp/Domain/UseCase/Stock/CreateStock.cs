@@ -2,6 +2,7 @@ using System;
 using TesteCsharp.Services.Database;
 using System.Diagnostics;
 using System.Text.Json;
+using System.Collections.Generic;
 
 namespace TesteCsharp.Domain.UseCase.Stock
 {
@@ -10,14 +11,9 @@ namespace TesteCsharp.Domain.UseCase.Stock
         public string Name { get; set; }
     }
 
-    public class CreateStockOutput
-    {
-        public Model.Stock Stock { get; set; }
-    }
-
     public class CreateStock
     {
-        public static CreateStockOutput handle(CreateStockInput payload)
+        public static Model.Stock handle(CreateStockInput payload)
         {
             string uuid = Guid.NewGuid().ToString();
 
@@ -33,13 +29,9 @@ namespace TesteCsharp.Domain.UseCase.Stock
 
             SqliteService.DisconnectDB(connection);
 
-            Model.Stock stock = new Model.Stock() {
-                Id = result[0]["id"],
-                Name = result[0]["name"],
-                CreatedAt = result[0]["created_at"],
-            };
+            var mapper = ConfigMapper.Handle();
 
-            return new CreateStockOutput() { Stock = stock };
+            return mapper.Map<Model.Stock>(result[0]);
         }
     }
 }
